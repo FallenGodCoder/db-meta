@@ -2,11 +2,6 @@ package com.tc.meta.product.mysql;
 
 import com.tc.meta.DefaultDBMetaServiceImpl;
 import com.tc.meta.vo.MetaDBInfo;
-import oracle.jdbc.internal.OracleConnection;
-
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 
 /**
   *                    _ooOoo_
