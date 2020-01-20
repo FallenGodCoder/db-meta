@@ -45,7 +45,7 @@
     </dependencies>
 
     <build>
-        <finalName>DWD_SERVER</finalName>
+        <finalName>dbmeta</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
