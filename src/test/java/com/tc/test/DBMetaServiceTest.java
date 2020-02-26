@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.tc.meta.DBMetaService;
 import com.tc.meta.DBMetaServiceFactory;
 import com.tc.meta.vo.*;
+import com.tc.test.config.DatabaseMetaInfoProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,32 +14,11 @@ public class DBMetaServiceTest {
     DBMetaService dbMetaService;
     MetaDBInfo metaDBInfo;
 
-    private MetaDBInfo getMysqlDbMetaInfo () {
-        MetaDBInfo metaDBInfo = new MetaDBInfo();
-        metaDBInfo.setDirverClass("com.mysql.cj.jdbc.Driver");
-        metaDBInfo.setDbType("MySQL");
-        metaDBInfo.setUrl("jdbc:mysql://192.168.20.252:3306/deepwater?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false");
-        metaDBInfo.setUserName("root");
-        metaDBInfo.setPassword("12345678");
-
-        return metaDBInfo;
-    }
-
-    private MetaDBInfo getOracleMetaInfo () {
-        MetaDBInfo metaDBInfo = new MetaDBInfo();
-        metaDBInfo.setDirverClass("oracle.jdbc.driver.OracleDriver");
-        metaDBInfo.setDbType("Oracle");
-        metaDBInfo.setUrl("jdbc:oracle:thin:@192.168.20.38:1521:kfdb");
-        metaDBInfo.setUserName("td");
-        metaDBInfo.setPassword("password");
-
-        return metaDBInfo;
-    }
-
     @Before
     public void before() {
-        metaDBInfo = this.getOracleMetaInfo();
-//        metaDBInfo = this.getMysqlDbMetaInfo();
+//        metaDBInfo = DatabaseMetaInfoProvider.getMysqlDbMetaInfo();
+//        metaDBInfo = DatabaseMetaInfoProvider.getOracleMetaInfo()
+        metaDBInfo = DatabaseMetaInfoProvider.getDb2MetaInfo();
 
         DBMetaServiceFactory dbMetaServiceFactory = DBMetaServiceFactory.getInstance();
         dbMetaService = dbMetaServiceFactory.getService(metaDBInfo);
@@ -102,7 +82,8 @@ public class DBMetaServiceTest {
     public void getTableColumnByTableName() {
         // 表名列名在有些数据库中区分大小写
 //        String tableName = "T_SYS_USER"; // 这个表我的oralce中有
-        String tableName = "dw_plugin_info"; // 这个表我的mysql中有
+//        String tableName = "dw_plugin_info"; // 这个表我的mysql中有
+        String tableName = "ACT_APP_DATA"; // 这个表我的db2中有
         List<MetaDBTableColumn> tableColumns = dbMetaService.getTableColumnByTableName(tableName);
         for (MetaDBTableColumn tableColumn : tableColumns) {
             System.out.println(tableColumn);
@@ -126,7 +107,7 @@ public class DBMetaServiceTest {
 
     @Test
     public void getCatalogs() {
-        // 这个catalogs在mysql中有，oracle中没有
+        // 这个catalogs在mysql中有，oracle中没有,db2没有
         List<String> catalogs = dbMetaService.getCatalogs();
         System.out.println("catalogs:");
         for (String catalog : catalogs) {
@@ -136,7 +117,7 @@ public class DBMetaServiceTest {
 
     @Test
     public void getSchemas() {
-        // 这个schema在oracle中有，mysql中没有
+        // 这个schema在oracle,db2中有，mysql中没有
         List<String> schemas = dbMetaService.getSchemas();
         System.out.println("schemas:");
         for (String schema : schemas) {
@@ -146,6 +127,7 @@ public class DBMetaServiceTest {
 
     @Test
     public void getFunctions () {
+        // db2 这个jdbc好像没有实现这个方法
         List<MetaDBFunction> functions = dbMetaService.getFunctions();
         System.out.println("functions:");
         for (MetaDBFunction function : functions) {

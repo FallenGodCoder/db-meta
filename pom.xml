@@ -13,16 +13,32 @@
     </properties>
 
     <dependencies>
+        <!-- mysql驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
         </dependency>
 
+        <!-- oracle驱动 -->
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.3</version>
+        </dependency>
+
+        <!-- DB2驱动jar包 -->
+        <!-- https://mvnrepository.com/artifact/cn.guoyukun.jdbc/db2jcc -->
+        <dependency>
+            <groupId>cn.guoyukun.jdbc</groupId>
+            <artifactId>db2jcc</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.guoyukun.jdbc/db2jcc_license_cu -->
+        <dependency>
+            <groupId>cn.guoyukun.jdbc</groupId>
+            <artifactId>db2jcc_license_cu</artifactId>
+            <version>1.4.2</version>
         </dependency>
 
         <dependency>
