@@ -1,6 +1,5 @@
 package com.tc.test;
 
-import com.google.common.base.Joiner;
 import com.tc.meta.DBMetaService;
 import com.tc.meta.DBMetaServiceFactory;
 import com.tc.meta.vo.*;
@@ -64,10 +63,8 @@ public class DBMetaServiceTest {
     @Test
     public void getTableTypes() {
         List<String> tableTypes = dbMetaService.getTableTypes();
-        String resultStr = Joiner.on("\r\n").join(tableTypes);
-
         System.out.println("\r\ntableTypes:");
-        System.out.println(resultStr);
+        tableTypes.forEach(System.out::println);
     }
 
     @Test

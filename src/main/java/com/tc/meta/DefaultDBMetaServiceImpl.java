@@ -1,6 +1,5 @@
 package com.tc.meta;
 
-import com.google.common.collect.Lists;
 import com.tc.meta.util.MetaDBHelper;
 import com.tc.meta.vo.*;
 
@@ -8,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,7 +76,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<String> getCatalogs() {
         Connection conn = null;
-        List<String> catalogList = Lists.newArrayList();
+        List<String> catalogList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -99,7 +99,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<String> getSchemas() {
         Connection conn = null;
-        List<String> schemaList = Lists.newArrayList();
+        List<String> schemaList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -122,7 +122,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<String> getTableTypes() {
         Connection conn = null;
-        List<String> tableTypeList = Lists.newArrayList();
+        List<String> tableTypeList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -148,7 +148,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDBTable> getTables() {
         Connection conn = null;
-        List<MetaDBTable> metaDbTableList = Lists.newArrayList();
+        List<MetaDBTable> metaDbTableList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -184,7 +184,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDBTable> getTableColumn() {
         Connection conn = null;
-        List<MetaDBTable> metaDbTableList = Lists.newArrayList();
+        List<MetaDBTable> metaDbTableList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -207,7 +207,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
                 MetaDBTable metaDBTable = new MetaDBTable(tableName, tableCat, tableSchem, tableType, remarks);
 
                 ResultSet columns = metaData.getColumns(catalog, schema, tableName, null);
-                List<MetaDBTableColumn> metaDbTableColumnList = Lists.newArrayList();
+                List<MetaDBTableColumn> metaDbTableColumnList = new ArrayList();
                 while (columns.next()) {
                     String tableNameStr = columns.getString("table_name");
                     String columnName = columns.getString("column_name");
@@ -238,7 +238,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDBTableColumn> getTableColumnByTableName(String tableName) {
         Connection conn = null;
-        List<MetaDBTableColumn> metaDbTableColumnList = Lists.newArrayList();
+        List<MetaDBTableColumn> metaDbTableColumnList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -269,7 +269,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDBFunction> getFunctions() {
         Connection conn = null;
-        List<MetaDBFunction> resultList = Lists.newArrayList();
+        List<MetaDBFunction> resultList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -303,7 +303,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDbProcedure> getProcedures() {
         Connection conn = null;
-        List<MetaDbProcedure> resultList = Lists.newArrayList();
+        List<MetaDbProcedure> resultList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -335,7 +335,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDBPKTableColumn> getPrimaryColumn(String tableNameParam) {
         Connection conn = null;
-        List<MetaDBPKTableColumn> resultList = Lists.newArrayList();
+        List<MetaDBPKTableColumn> resultList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
@@ -367,7 +367,7 @@ public class DefaultDBMetaServiceImpl implements DBMetaService {
     @Override
     public List<MetaDBIndex> getIndexInfo(String tableNameParam) {
         Connection conn = null;
-        List<MetaDBIndex> resultList = Lists.newArrayList();
+        List<MetaDBIndex> resultList = new ArrayList();
         try {
             conn = MetaDBHelper.getConnection(metaDBInfo);
             DatabaseMetaData metaData = conn.getMetaData();
